@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://yourapp.com/playlistSong.schema.json",
+  "type": "object",
+  "properties": {
+    "playlistId": {
+      "type": "integer"
+    },
+    "songId": {
+      "type": "string"
+    },
+    "addedBy": {
+      "type": "integer"
+    },
+    "addedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["playlistId", "songId", "addedBy"],
+  "additionalProperties": false
+}

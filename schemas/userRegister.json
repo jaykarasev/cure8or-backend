@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://yourapp.com/userRegister.schema.json",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 50
+    },
+    "firstName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "lastName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "minLength": 6,
+      "maxLength": 60
+    },
+    "password": {
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 100
+    },
+    "imageUrl": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "required": ["username", "firstName", "lastName", "email", "password"],
+  "additionalProperties": false
+}

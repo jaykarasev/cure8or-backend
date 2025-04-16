@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://yourapp.com/userAuth.schema.json",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 100,
+      "description": "Can be either username or email"
+    },
+    "password": {
+      "type": "string",
+      "minLength": 6
+    }
+  },
+  "required": ["identifier", "password"],
+  "additionalProperties": false
+}

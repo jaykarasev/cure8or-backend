@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://yourapp.com/songNew.schema.json",
+  "type": "object",
+  "properties": {
+    "spotifyId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "artist": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "album": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "duration": {
+      "type": "integer"
+    },
+    "previewUrl": {
+      "type": ["string", "null"],
+      "format": "uri"
+    },
+    "imageUrl": {
+      "type": ["string", "null"],
+      "format": "uri"
+    },
+    "spotifyUrl": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "required": ["spotifyId", "title", "artist"],
+  "additionalProperties": false
+}
