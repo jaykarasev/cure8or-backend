@@ -175,6 +175,7 @@ class User {
       firstName: "first_name",
       lastName: "last_name",
       imageUrl: "image_url",
+      username: "username",
     });
 
     const idVarIdx = "$" + (values.length + 1);

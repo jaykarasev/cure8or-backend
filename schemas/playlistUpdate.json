@@ -6,9 +6,12 @@
     "name": { "type": "string" },
     "description": { "type": "string" },
     "isPrivate": { "type": "boolean" },
-    "password": { "type": "string" },
-    "imageUrl": { "type": "string", "format": "uri" }
+    "password": { "type": ["string", "null"] },
+    "imageUrl": {
+      "type": ["string", "null"],
+      "format": "uri"
+    }
   },
-  "required": [],
+  "required": ["name", "description"],
   "additionalProperties": false
 }
