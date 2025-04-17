@@ -25,9 +25,6 @@ router.get("/search", async function (req, res, next) {
     const data = await spotifyApi.searchTracks(query, { limit: 10 });
 
     const results = data.body.tracks.items.map((track) => {
-      console.log("🔍 Spotify Track Data:", track); // Debugging
-      console.log("🎵 Preview URL:", track.preview_url); // Logs preview URL
-
       return {
         spotifyId: track.id,
         title: track.name,
@@ -89,8 +86,6 @@ router.get("/", async function (req, res, next) {
  **/
 router.post("/", async function (req, res, next) {
   try {
-    console.log("Adding new song:", req.body);
-
     const validator = jsonschema.validate(req.body, songNewSchema);
     if (!validator.valid) {
       const errs = validator.errors.map((e) => e.stack);

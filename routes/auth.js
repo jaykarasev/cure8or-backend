@@ -35,8 +35,6 @@ router.post("/token", async function (req, res, next) {
     const user = await User.authenticate(identifier, password);
     const token = createToken(user);
 
-    console.log("Login Successful:", { token, user });
-
     return res.json({ token, user });
   } catch (err) {
     return next(err);
@@ -77,8 +75,6 @@ router.post("/register", async function (req, res, next) {
     });
 
     const token = createToken(user);
-
-    console.log("Signup Successful:", { token, user });
 
     return res.json({ token, user });
   } catch (err) {

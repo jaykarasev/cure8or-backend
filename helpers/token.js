@@ -8,17 +8,14 @@ const { SECRET_KEY } = require("../config");
  * @returns {string} JWT token
  */
 function createToken(user) {
-  console.assert(
-    user.id !== undefined,
-    "createToken passed user without an ID"
-  );
-
-  let payload = {
+  const payload = {
     id: user.id,
     isAdmin: user.isAdmin || false, // Keep isAdmin for future admin roles
   };
 
-  return jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" }); // Expires in 1 hour
+  if (!payload) throw new Error("JWT signing failed — payload was undefined.");
+
+  return jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" }); // 1 hour expiration
 }
 
 module.exports = { createToken };

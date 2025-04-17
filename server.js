@@ -9,7 +9,9 @@ const { PORT } = require("./config");
   try {
     await db.connect(); // Connect to the database first
     app.listen(PORT, function () {
-      console.log(`Cure8or running on http://localhost:${PORT}`);
+      if (process.env.NODE_ENV !== "production") {
+        console.log(`Cure8or running on http://localhost:${PORT}`);
+      }
     });
   } catch (err) {
     console.error("❌ Error connecting to database:", err);

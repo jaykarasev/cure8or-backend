@@ -19,7 +19,9 @@ async function refreshSpotifyToken() {
     spotifyApi.setAccessToken(data.body["access_token"]);
 
     if (process.env.NODE_ENV !== "test") {
-      console.log("✅ Spotify API Token Set!");
+      if (process.env.NODE_ENV !== "production") {
+        console.log("✅ Spotify API Token Set!");
+      }
       setTimeout(refreshSpotifyToken, 55 * 60 * 1000);
     }
   } catch (err) {

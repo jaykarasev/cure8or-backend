@@ -11,7 +11,6 @@ function authenticateJWT(req, res, next) {
     if (authHeader) {
       const token = authHeader.replace(/^[Bb]earer /, "").trim();
       res.locals.user = jwt.verify(token, SECRET_KEY);
-      console.log("✅ Authenticated User:", res.locals.user); // DEBUG
     }
     return next();
   } catch (err) {
@@ -31,10 +30,6 @@ async function ensurePlaylistAccess(req, res, next) {
     const userId = res.locals.user?.id;
     const playlistId = parseInt(req.params.id, 10);
 
-    console.log(
-      `🔍 Checking access for user ${userId} on playlist ${playlistId}`
-    );
-
     if (!userId) throw new UnauthorizedError("User ID is missing from token.");
 
     // Fetch the playlist details
@@ -44,9 +39,6 @@ async function ensurePlaylistAccess(req, res, next) {
 
     // ✅ If the user is the owner, grant access automatically
     if (playlist.ownerId === userId) {
-      console.log(
-        `✅ User ${userId} is the owner of playlist ${playlistId}. Full access granted.`
-      );
       return next();
     }
 
@@ -57,18 +49,11 @@ async function ensurePlaylistAccess(req, res, next) {
     );
 
     if (result.rows.length === 0) {
-      console.error(
-        `🚨 Access Denied: User ${userId} does not have access to playlist ${playlistId}`
-      );
       throw new UnauthorizedError("You do not have access to this playlist.");
     }
 
-    console.log(
-      `✅ User ${userId} has unlocked access to playlist ${playlistId}`
-    );
     return next();
   } catch (err) {
-    console.error("❌ Error in ensurePlaylistAccess:", err);
     return next(err);
   }
 }

@@ -11,7 +11,6 @@ const playlistUpdateSchema = require("../schemas/playlistUpdate.json");
 
 /** Create a new playlist */
 router.post("/", authenticateJWT, async function (req, res, next) {
-  console.log("REQ.BODY >>>", req.body);
   try {
     const validator = jsonschema.validate(req.body, playlistNewSchema);
     if (!validator.valid) {
@@ -20,7 +19,6 @@ router.post("/", authenticateJWT, async function (req, res, next) {
     }
 
     const userId = res.locals.user.id;
-    console.log("OWNER ID:", res.locals.user);
     const playlist = await Playlist.create({ ...req.body, ownerId: userId });
     return res.status(201).json({ playlist });
   } catch (err) {
@@ -65,9 +63,6 @@ router.post("/:id/access", authenticateJWT, async function (req, res, next) {
     }
 
     const playlistId = Number(req.params.id);
-    console.log(
-      `Unlock request for Playlist ID: ${playlistId} by User ID: ${authUserId}`
-    );
 
     const playlist = await Playlist.getBasicInfo(playlistId);
     if (!playlist) throw new BadRequestError("Playlist not found.");
@@ -99,7 +94,6 @@ router.patch("/:id", authenticateJWT, async function (req, res, next) {
 
     // Pass entire validated body
     const updatedPlaylist = await Playlist.update(req.params.id, req.body);
-    console.log("PATCH /playlists/:id - updating with:", req.body);
     return res.json({ playlist: updatedPlaylist });
   } catch (err) {
     return next(err);
